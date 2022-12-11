@@ -1,6 +1,10 @@
-import {TodosList} from "./TodosList";
 
-export function Main({ items, onToggleAll, removeTodo,markAsCompleted,doubleClickEdit}) {
+import {Listcontext} from "./Listcontext";
+import { useContext } from "react";
+
+export function Main({children}) {
+
+  const {onToggleAll} = useContext(Listcontext)
 
   function handleToggleAll(event) {
     onToggleAll(event.target.checked);
@@ -11,7 +15,7 @@ export function Main({ items, onToggleAll, removeTodo,markAsCompleted,doubleClic
         <input className="toggle-all"
                onChange={handleToggleAll}
                type="checkbox"/>
-        <TodosList items={items} removeTodo={removeTodo} markAsCompleted={markAsCompleted} doubleClickEdit={doubleClickEdit}/>
+        {children}
       </section>
   );
 }

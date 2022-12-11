@@ -1,6 +1,10 @@
 import {useState} from "react";
+import {Listcontext} from "./Listcontext";
+import { useContext } from "react";
 
-export function TodosList({ items, removeTodo,markAsCompleted,doubleClickEdit}) {
+export function TodosList() {
+  const {doubleClickEdit, markAsCompleted,removeTodo,todos} = useContext(Listcontext)
+
   let [ toggleEdit , setToggleEdit ] = useState([]);
   
   function HandleDoubleClick(item){
@@ -19,8 +23,8 @@ export function TodosList({ items, removeTodo,markAsCompleted,doubleClickEdit}) 
 
   return (
       <ul className="todo-list">
-        { items.map( item => (
-            <li className={item.completed? 'completed':'' + ((toggleEdit===item.id)? 'editing': '')}>
+        { todos.map( item => (
+            <li className={item.completed? 'completed':'' + ((toggleEdit===item.id)? 'editing': '')} key={item.id}>
               <div className="view">
                 <input className="toggle"
                        type="checkbox"
